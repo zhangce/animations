@@ -1,1 +1,348 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+
+
+<body>
+
+<div id="c42">
+</div>
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
+
+
+<!--
+
+
+<table>
+    <tbody>
+        <tr>
+            <th id=" c1" style="border-width: 3px; padding: 9px;"></th>
+            <th id=" c2" style="border-width: 3px; padding: 9px;"></th>
+            <th id=" c3" style="border-width: 3px; padding: 9px;"></th>
+        </tr>
+        <tr>
+            <td id=" c4" style="border-width: 3px; padding: 9px;">
+            	<div id="c42">
+            	</div>
+            </td>
+            <td id=" c5" style="border-width: 3px; padding: 9px;"></td>
+            <td id=" c6" style="border-width: 3px; padding: 9px;"></td>
+        </tr>
+        <tr>
+            <td id=" c7" style="border-width: 3px; padding: 9px;"></td>
+            <td id=" c8" style="border-width: 3px; padding: 9px;"></td>
+            <td id=" c9" style="border-width: 3px; padding: 9px;"></td>
+        </tr>
+        <tr>
+            <td id=" c10" style="border-width: 3px; padding: 9px;"></td>
+            <td id=" c11" style="border-width: 3px; padding: 9px;"></td>
+            <td id=" c12" style="border-width: 3px; padding: 9px;"></td>
+        </tr>
+        <tr>
+            <td style="border-width: 3px; padding: 9px;"></td>
+            <td style="border-width: 3px; padding: 9px;"></td>
+            <td style="border-width: 3px; padding: 9px;"></td>
+        </tr>
+    </tbody>
+</table>
+-->
+
+<svg width="400" height="400">
+
+  <rect id="disk0" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk1" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk2" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk3" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk4" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk5" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk6" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk7" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk8" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk9" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+
+  <rect id="disk00" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk11" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk22" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk33" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk44" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk55" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk66" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk77" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk88" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+  <rect id="disk99" x="0" y="0" width="10" height="10" style="fill:rgb(0,0,255);" />
+
+  <rect id="buf0" x="0" y="0" width="10" height="10" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf1" x="0" y="0" width="10" height="10" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf2" x="0" y="0" width="10" height="10" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+
+</svg>
+
+<script>
+
+var disks = [];
+var bufs = [];
+
+var color = d3.scaleOrdinal(d3.schemeCategory10).domain([0,1,2,3,4,5,6,7,8,9]);
+
+
+function sync_opt(f){
+	return new Promise((resolve, rejected) => {
+		f.on('end', function(){
+			resolve(0);
+		})
+	});
+}
+
+async function animation(t){
+
+	for (var i = 0; i <= 9; i++) {
+		await sync_opt(
+			d3.select("#disk" + i).transition().duration(0).attr("x", i*15).attr("y", 10).attr("style", "fill:" + color(i) + ";")
+		)
+
+		 + 
+
+		await sync_opt(
+			d3.select("#disk" + i + i).transition().duration(0).attr("x", i*15).attr("y", 10).attr("style", "fill:" + color(i) + ";")
+		) ;
+	}
+
+	/*
+	for (var i = 0; i <= 3; i++){
+		 await sync_opt(
+			d3.select("#buf" + i).transition().duration(1).attr("x", i * 15 + 50).attr("y", 100));
+	}
+	*/
+
+	for (var j = 0; j <= 2; j++){
+		await sync_opt(d3.select("#buf" + j).transition().duration(0).attr("x", j * 15 + 50).attr("y", 100));
+	}
+
+
+	i = 0; j = 0;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+
+	i = 1; j = 1;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+
+	i = 2; j = 2;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+
+	i = 0;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", i * 15).attr("y", 10));
+
+	i = 3; j = 0;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+
+	i = 1;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", i * 15).attr("y", 10));
+
+	i = 4; j = 1;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+
+	i = 2;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", i * 15).attr("y", 10));
+
+	i = 5; j = 2;
+	await sync_opt(d3.select("#disk" + i).transition().duration(t).attr("x", j * 15 + 50).attr("y", 100));
+}
+
+
+var slider = document.getElementById("myRange");
+d3.select("#c42").text(slider.value);
+animation(slider.value * 10);
+
+slider.oninput = function() {
+	d3.select("#c42").text(this.value);
+	animation(this.value * 10);
+}
+
+
+//animation(100);
+
+
+/*
+// re-arrange buffer page
+for (var i = 0; i <= 9; i++) {
+	var color = d3.scaleOrdinal(d3.schemeCategory10).domain([0,1,2,3,4,5,6,7,8,9]);
+	
+	disks.push(d3.select("#disk" + i).transition().duration(100).attr("x", i*15).attr("y", 10).attr("style", "fill:" + color(i) + ";"));
+
+	d3.select("#disk" + i + i).transition().duration(100).attr("x", i*15).attr("y", 10).attr("style", "fill:" + color(i) + ";");
+}
+
+for (var i = 0; i <= 3; i++){
+	bufs.push(d3.select("#buf" + i).transition().duration(100).attr("x", i * 15 + 50).attr("y", 100));
+}
+
+
+i = 0; j = 0;
+disks[i].transition().duration(1000).attr("x", j * 15 + 50).attr("y", 100)
+.on('end', function(){
+	i = 1; j = 1;
+	d3.select("#disk" + i).transition().duration(1000).attr("x", j * 15 + 50).attr("y", 100).
+	on('end', function(){
+		i = 2; j = 2;
+		d3.select("#disk" + i).transition().duration(1000).attr("x", j * 15 + 50).attr("y", 100);
+	})
+});
+
+*/
+
+
+
+
+
+
+/*
+i = 1; j = 1;
+disks[i] = disks[i].transition().duration(1000).attr("x", j * 15 + 50).attr("y", 100);
+
+i = 2; j = 2;
+disks[i] = disks[i].transition().duration(1000).attr("x", j * 15 + 50).attr("y", 100);
+*/
+
+
+
+
+
+//d3.select("#c42").text("5");
+
+//alert();
+//alert(d3.select("#c4").text());
+
+/*
+var sliderSimple = d3
+	.sliderBottom()
+	.min(d3.min(data))
+	.max(d3.max(data))
+	.width(300)
+	.tickFormat(d3.format('.2%'))
+	.ticks(5)
+	.default(0.015)
+	.on('onchange', val => {
+	  d3.select('p#value-simple').text(d3.format('.2%')(val));
+	});
+*/
+
+
+//var slider = document.getElementById("myRange");
+//d3.select("#c42").text(slider.value);
+//
+//slider.oninput = function() {
+//	d3.select("#c42").text(this.value);
+//}
+
+//d3.select("#c42").text("20");
+
+
+//for (var i = 100; i >= 1; i--) {
+//	d3.select("#myRange").attr("value", i);
+//	//alert(i);
+//}
+
+//d3.select("#myRange").transition().duration(100).attr("value", 1);
+
+//d3.select("#rect1").transition().duration(100).attr("x", 100);
+
+/*function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+*/
+
+/*
+for (var i = 0; i<= 100; i++) {
+	//d3.select("#rect1").attr("x", i);
+	//sleep(100);
+	d3.select("#rect1").transition().duration(1000).attr("x", i);
+}
+*/
+
+
+
+/*
+function f1(){
+	return new Promise(function(resolve, reject){
+
+		for (var i = 0; i <= 100; i=i+2) {
+			d3.select("#rect1").transition().duration(10000).attr("x", i);
+		}
+		
+		
+
+		resolve(0);
+
+	});
+}
+
+
+
+function f2(){
+	return new Promise(function(resolve, reject){
+		
+
+		for (var i = 0; i <= 100; i=i+2) {
+			d3.select("#rect2").transition().duration(10000).attr("y", i);
+		}
+
+		resolve(1);
+	});
+}
+
+
+
+async function main(){
+
+
+	f1();
+	f2();
+
+	console.log("--------");
+
+}
+
+main();
+
+*/
+
+
+
+
+//objstore = malloc(tuples_100, 10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+
+
+
+</html>
+
