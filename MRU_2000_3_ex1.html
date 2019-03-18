@@ -175,6 +175,7 @@ async function udf(pid, NBUF){
 			if(bid == -1){
 				// need to evict
 				// LRU
+				/*
 				toevictage = 1000000;
 				for(var i=0;i<NBUF;i++){
 					if(pageage[bufcontent[i]] < toevictage){
@@ -182,9 +183,9 @@ async function udf(pid, NBUF){
 						bid = i;
 					}
 				}
+				*/
 				
 				// MRU
-				/*
 				toevictage = -1;
 				for(var i=0;i<NBUF;i++){
 					if(pageage[bufcontent[i]] > toevictage){
@@ -192,7 +193,6 @@ async function udf(pid, NBUF){
 						bid = i;
 					}
 				}
-				*/
 				
 				await move(disks[bufcontent[bid]], pid, "x", 50 + bufcontent[bid] * 30, "y", 200, TIME);
 				await move(disks[page], pid, "x", 50 + bid * 30, "y", 100, TIME);
