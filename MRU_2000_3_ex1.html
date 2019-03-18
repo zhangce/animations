@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+
+
+<body>
+
+<svg width="375" height="250">
+
+  <text x = "0" y = "20">CPU</text>
+  <text x = "0" y = "120">RAM</text>
+  <text x = "0" y = "220">DISK</text>
+
+  <text id="mh" x = "320" y = "120">--</text>
+
+  <text x = "200" y = "20">Request: </text>
+  <rect id="request" x="260" y="0" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+
+
+  <rect id="disk0" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk1" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk2" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk3" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk4" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk5" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk6" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk7" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk8" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk9" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+
+  <rect id="disk00" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk11" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk22" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk33" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk44" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk55" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk66" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk77" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk88" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="disk99" x="50" y="50" width="20", height="30" style="fill:rgb(128,128,128);stroke-width:1;stroke:rgb(0,0,0);" />
+
+  <rect id="buf0" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf1" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf2" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf3" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf4" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf5" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf6" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf7" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf8" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+  <rect id="buf9" x="-50" y="-50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+
+  <rect id="cpu" x="50" y="50" width="20", height="30" style="fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);" />
+
+  <!--
+  <circle id="miss" cx="50" cy="50" r="50", style="fill:rgb(128,128,128);" />
+  <circle id="miss" cx="50" cy="50" r="50", style="fill:rgb(128,128,128);" />
+   -->
+</svg>
+
+<br/>
+<div id="nmiss"></div>     
+
+
+<script type="text/javascript">
+	
+var obj_ids = [0, ];
+var pid_xs = [0,];
+var pid_ys = [0,];
+var states = [0,0,0,0,0];
+var colors = d3.scaleOrdinal(d3.schemeCategory10).domain([0,1,2,3,4,5,6,7,8,9]);
+//var pages_to_visit = [0,1,8,0,2,5,0,1,3,0,1,4,0,2,6,0,2,7];
+var pages_to_visit = [0,1,2,0,4,5,0];
+///////////////// HELPER ///////////////////
+function sync_opt(f){
+	return new Promise((resolve, rejected) => {
+		f.on('end', function(){
+			resolve(0);
+		})
+	});
+};
+async function move_obj2(oname, xattr, x, yattr, y, duration=0){
+	await sync_opt(
+		d3.select("#" + oname).transition().duration(duration).attr(xattr, x).attr(yattr, y)
+	);
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function move(obj, pid, xattr, x, yattr, y, duration){
+	var vvv = 0;
+	d3.select(obj).transition().duration(duration).attr(xattr, x).attr(yattr, y)
+	.on('end', function() {
+		vvv = 1;
+	});
+	while(vvv == 0){
+		await sleep(1);
+	}
+	vvv = 0;
+}
+async function style(obj, pid, stylestr, duration){
+	var vvv = 0;
+	d3.select(obj).transition().duration(duration).attr("style", stylestr)
+	.on('end', function() {
+		vvv = 1;
+	});
+	while(vvv == 0){
+		await sleep(1);
+	}
+	vvv = 0;
+}
+function malloc(pid, name, x, y){
+	move_obj2(name, "x", pid_xs[pid] + x, "y", pid_ys[pid] + y, 0);
+	return "#" + name;
+}
+function cmalloc(pid, name, x, y){
+	move_obj2(name, "cx", pid_xs[pid] + x, "cy", pid_ys[pid] + y, 0);
+	return "#" + name;
+}
+/////////////////////////////////
+TIME = 2000;
+async function udf(pid, NBUF){
+	var disks = [0,0,0,0,0,0,0,0,0,0];
+	var disks_dummy = [0,0,0,0,0,0,0,0,0,0];
+	var disks_dummy2 = [0,0,0,0,0,0,0,0,0,0];
+	for(var i=0;i<10;i++){
+		disks[i] = malloc(pid, "disk" + i, 50 + i * 30, 200);
+		disks_dummy[i] = malloc(pid, "disk" + i + i, 50 + i * 30, 200);
+		style(disks[i], pid, "fill:" + colors(i) + ";stroke-width:1;stroke:rgb(0,0,0);", 0);
+		style(disks_dummy[i], pid, "fill:" + colors(i) + ";stroke-width:1;stroke:rgb(0,0,0);", 0);
+	}
+	var bufs = [0,0,0,0,0,0,0,0,0,0];
+	for(var i=0;i<NBUF;i++){
+		bufs[i] = malloc(pid, "buf" + i, 50 + i * 30, 100);
+	}
+	var cpu = malloc(pid, "cpu", 50, 0);
+	var bufcontent = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+	var pageage = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+	var nmiss = 0;
+	var nhit = 0;
+	cpubid = -1;
+	var t = 0;
+	for(var ipage in pages_to_visit){
+		page = pages_to_visit[ipage];
+		console.log(page);
+		if(cpubid != -1){
+			await sleep(TIME);
+			await style(bufs[cpubid], pid, "fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);", 10);
+			await move(bufs[cpubid], pid, "x", 50 + cpubid * 30, "y", 100, 10);
+			await style(bufs[cpubid], pid, "fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);", TIME);
+		}
+		await style("#request", pid, "fill:" + colors(page) + ";stroke-width:1;stroke:rgb(0,0,0);", 0);
+		await style("#request", pid, "fill:" + colors(page) + ";stroke-width:1;stroke:rgb(0,0,0);", TIME);
+		var bid = -1;
+		for(var i=0;i<NBUF;i++){
+			if(bufcontent[i] == page){
+				bid = i;
+			}
+		}
+		if(bid == -1){
+			// miss
+			d3.select("#mh").text("MISS");
+			await style("#mh", pid, "fill:rgb(255,0,0);", 0);
+			await style("#mh", pid, "fill:rgb(200,200,200);", TIME);
+			nmiss = nmiss + 1;
+			for(var i=0;i<NBUF;i++){
+				if(bufcontent[i] == -1){
+					bid = i;
+				}
+			}
+			if(bid == -1){
+				// need to evict
+				// LRU
+				toevictage = 1000000;
+				for(var i=0;i<NBUF;i++){
+					if(pageage[bufcontent[i]] < toevictage){
+						toevictage = pageage[bufcontent[i]];
+						bid = i;
+					}
+				}
+				
+				// MRU
+				/*
+				toevictage = -1;
+				for(var i=0;i<NBUF;i++){
+					if(pageage[bufcontent[i]] > toevictage){
+						toevictage = pageage[bufcontent[i]];
+						bid = i;
+					}
+				}
+				*/
+				
+				await move(disks[bufcontent[bid]], pid, "x", 50 + bufcontent[bid] * 30, "y", 200, TIME);
+				await move(disks[page], pid, "x", 50 + bid * 30, "y", 100, TIME);
+				style(bufs[bid], pid, "fill:" + colors(page) + ";", 0);
+				bufcontent[bid] = page;
+				pageage[page] = t;
+			}else{
+				// fetch
+				await move(disks[page], pid, "x", 50 + bid * 30, "y", 100, TIME);
+				style(bufs[bid], pid, "fill:" + colors(page) + ";stroke-width:1;stroke:rgb(0,0,0);", 0);
+				//await move(disks[page], pid, "x", 50 , "y", 0, 100);
+				bufcontent[bid] = page;
+				pageage[page] = t;
+			}
+			await move(bufs[bid], pid, "x", 50, "y", 0, TIME);			
+		}else{
+			// hit
+			nhit = nhit + 1;
+			d3.select("#mh").text("HIT");
+			await style("#mh", pid, "fill:rgb(0,255,0);", 0);
+			await style("#mh", pid, "fill:rgb(200,200,200);", TIME);
+			style(bufs[bid], pid, "fill:" + colors(page) + ";stroke-width:1;stroke:rgb(0,0,0);", 0);
+			await move(bufs[bid], pid, "x", 50, "y", 0, TIME);	
+			pageage[page] = t;
+		}
+		t = t + 1;
+		cpubid = bid;
+		//console.log("miss:", nmiss, "    ", "hit:", nhit);
+		d3.select("#nmiss").text("#miss = " + nmiss + "; #hits = " + nhit);
+	}
+	if(cpubid != -1){
+		await style(bufs[cpubid], pid, "fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);", 10);
+		await move(bufs[cpubid], pid, "x", 50 + cpubid * 30, "y", 100, 10);
+	}
+	await style("#request", pid, "fill:rgba(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0);", 0);
+}
+/*
+async function udf(pid){
+	//return new Promise((resolve, rejected) => {
+		var machine = cmalloc(pid, "machine" + pid, 0, 0);
+		var grad = malloc(pid, "grad" + pid, -10, -10);
+		while(true){
+			style(machine, pid, "fill:rgb(200,0,0);", 0);
+			await sleep(200 * (pid + 1));
+			style(machine, pid, "fill:rgb(0,200,0);", 0);
+			
+			await move(grad, pid, "x", 250, "y", 250, 500);
+			await sleep(1000 - 200*(pid+1));
+		
+			await move(grad, pid, "x", pid_xs[pid]-10, "y", pid_ys[pid]-10, 500);
+		}
+}
+*/
+function main(){
+	udf(0, 3);
+//	udf(1);
+//	udf(2);
+//	udf(3);
+//	udf(4);
+}
+main();
+/////////////////// /////////////////// ///////////////////
+/*
+async function main(){
+	var colors = d3.scaleOrdinal(d3.schemeCategory10).domain([0,1,2,3,4,5,6,7,8,9]);
+	var centers_x = [100+400/2, 100+400, 100+400/2 + 100, 100+400/2 - 100, 100];
+	var centers_y = [50,    250, 500,     500,   250];
+	for (var i = 0; i < 5; i++) {
+		move_obj("machine", i, "cx", centers_x[i], "cy", centers_y[i]);
+		style_obj("machine", i, "fill:" + colors(i) + ";");
+		move_obj("grad", i, "x", centers_x[i]-10, "y", centers_y[i]-10);
+	}
+	while(true){
+		for (var i = 0; i < 5; i++) {
+			if(i != 5){
+				await move_obj("grad", i, "x", 300-10, "y", 300-10, 1000);
+			}
+			else{
+				await move_obj("grad", i, "x", 300-10, "y", 300-10, 1000);
+			}
+			//move_obj("grad", i, "x", centers_x[i]-10, "y", centers_y[i]-10);
+		}
+		
+		for (var i = 0; i < 5; i++) {
+			if(i != 5){
+				await move_obj("grad", i, "x", centers_x[i]-10, "y", centers_y[i]-10, 1000);
+			}
+			else{
+				await move_obj("grad", i, "x", centers_x[i]-10, "y", centers_y[i]-10, 1000);
+			}
+			
+		}
+	}
+	
+}
+*/
+//main();
+</script>
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>
